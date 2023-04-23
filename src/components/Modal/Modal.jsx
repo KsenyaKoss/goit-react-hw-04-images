@@ -9,7 +9,7 @@ export const Modal = ({ poster, onClose }) => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  });
 
   const handleKeyDown = ev => {
     if (ev.key === 'Escape' || ev.target === ev.currentTarget) {
