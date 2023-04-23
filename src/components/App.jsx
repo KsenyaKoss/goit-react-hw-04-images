@@ -11,7 +11,6 @@ export const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isListShown, setIsListShown] = useState(false);
   const [modalShown, setModalShown] = useState(null);
-  const [error, setError] = useState('');
   const [totalHits, setTotalHits] = useState(0);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
@@ -23,7 +22,7 @@ export const App = () => {
         setImages(prevState => [...prevState, ...results.data.hits]);
         setTotalHits(results.data.totalHits);
       })
-      .catch(error => setError(error.message))
+      .catch(error => console.log(error.message))
       .finally(() => {
         setIsLoading(false);
         setIsListShown(true);
