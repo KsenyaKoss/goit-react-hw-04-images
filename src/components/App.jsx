@@ -29,16 +29,13 @@ export const App = () => {
       });
   }, [page, query]);
 
-  useEffect(
-    (_, prevState) => {
-      if (!query) {
-        return;
-      } else {
-        getImages();
-      }
-    },
-    [query, getImages]
-  );
+  useEffect(() => {
+    if (!query) {
+      return;
+    } else {
+      getImages();
+    }
+  }, [query, getImages]);
 
   const onLoadMore = () => {
     setPage(prevState => prevState + 1);
