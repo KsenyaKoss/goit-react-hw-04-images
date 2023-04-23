@@ -1,21 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { StyledOverlay, StyledModal } from './Modal.styled';
 import PropTypes from 'prop-types';
 
 export const Modal = ({ poster, onClose }) => {
+  const handleKeyDown = useCallback(
+    ev => {
+      if (ev.key === 'Escape' || ev.target === ev.currentTarget) {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  });
-
-  const handleKeyDown = ev => {
-    if (ev.key === 'Escape' || ev.target === ev.currentTarget) {
-      onClose();
-    }
-  };
+  }, [handleKeyDown]);
 
   return (
     <StyledOverlay onClick={handleKeyDown}>

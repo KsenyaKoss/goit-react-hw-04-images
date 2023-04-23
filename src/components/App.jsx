@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './Imagegallery/Imagegallery';
 import { serviceApi } from './services/ServiceApi';
@@ -16,18 +16,7 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
 
-  useEffect(
-    (_, prevState) => {
-      if (!query) {
-        return;
-      } else {
-        getImages();
-      }
-    },
-    [query, page]
-  );
-
-  const getImages = () => {
+  const getImages = useCallback(() => {
     setIsLoading(true);
     serviceApi(page, query)
       .then(results => {
@@ -39,7 +28,18 @@ export const App = () => {
         setIsLoading(false);
         setIsListShown(true);
       });
-  };
+  }, [page, query]);
+
+  useEffect(
+    (_, prevState) => {
+      if (!query) {
+        return;
+      } else {
+        getImages();
+      }
+    },
+    [query, getImages]
+  );
 
   const onLoadMore = () => {
     setPage(prevState => prevState + 1);
