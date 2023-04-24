@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './Imagegallery/Imagegallery';
-import { serviceApi } from './services/ServiceApi';
+import { serviceApi } from '../services/ServiceApi';
 import { Button } from './Button/Button';
 import { Modal } from './Modal/Modal';
 import { Loader } from './Loader/Loader';
